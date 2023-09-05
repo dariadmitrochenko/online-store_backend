@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Repositories;
 
@@ -10,5 +10,4 @@ interface ProductRepositoryInterface
     public function createProduct(array $productData);
     public function updateProduct($productId, array $productData);
     public function getAvailableProducts();
-
 }
