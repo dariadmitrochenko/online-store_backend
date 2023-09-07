@@ -9,5 +9,5 @@ interface ProductRepositoryInterface
     public function deleteProduct($productId);
     public function createProduct(array $productData);
     public function updateProduct($productId, array $productData);
-    public function getAvailableProducts();
+    
 }
