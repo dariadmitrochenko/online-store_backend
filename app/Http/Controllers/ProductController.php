@@ -30,7 +30,7 @@ class ProductController extends Controller
     public function index(): JsonResponse
     {
         return response()->json([
-            'data' => $this->productRepository->getAllProducts()
+            'data' => $this->productRepository->getAllProducts()->toArray()
         ]);
     }
      public function import()

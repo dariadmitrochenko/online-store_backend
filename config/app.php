@@ -170,6 +170,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
+        Laravel\Passport\PassportServiceProvider::class
     ])->toArray(),
 
     /*
