@@ -6,7 +6,6 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Imports\ProductsImport;
 use App\Models\Product;
-use App\Repositories\ProductRepository;
 use App\Repositories\ProductRepositoryInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
@@ -17,24 +16,30 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function __construct(
-        private ProductRepositoryInterface $productRepository
-    ) {
+    public $productRepository;
+
+    public function __construct(ProductRepositoryInterface $productRepository) 
+    {
+        $this->productRepository = $productRepository;
     }
 
-    public function import()
+    /**
+     * Summary of index
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function index(): JsonResponse
+    {
+        return response()->json([
+            'data' => $this->productRepository->getAllProducts()->toArray()
+        ]);
+    }
+     public function import()
     {
         Excel::import(
             new ProductsImport, 'products.csv'
         );
 
         return redirect('/')->with('success', 'Products Imported Successfully!');
-    }
-    public function index(): JsonResponse
-    {
-        return response()->json([
-            'data' => $this->productRepository->getAllProducts()
-        ]);
     }
 
     /**

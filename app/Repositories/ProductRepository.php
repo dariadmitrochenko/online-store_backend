@@ -6,6 +6,11 @@ use App\Models\Product;
 
 class ProductRepository implements ProductRepositoryInterface
 {
+    public $product;
+    public function __construct(Product $product)
+    {
+        $this->model = $product;
+    }
     public function getAllProducts()
     {
         return Product::all();
@@ -31,8 +36,5 @@ class ProductRepository implements ProductRepositoryInterface
         return Product::whereId($productId)->update($productData);
     }
 
-    public function getAvailableProducts()
-    {
-        return Product::where('is_available', true);
-    }
+    
 }
